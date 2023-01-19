@@ -17,7 +17,7 @@ cheapCheck.addEventListener("click", () => checker(cheapCheck));
 goodCheck.addEventListener("click", () => checker(goodCheck));
 
 /*
-// mein Lösungsversuch (klappt noch nicht ganz):
+// mein 1. Lösungsversuch (klappt noch nicht ganz):
 let checkArr = [];
 if (!checkArr.includes(item) && checkArr.length < 2) {
     checkArr.push(item);
