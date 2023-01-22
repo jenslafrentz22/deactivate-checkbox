@@ -2,7 +2,7 @@ const fastCheck = document.querySelector("#fast");
 const cheapCheck = document.querySelector("#cheap");
 const goodCheck = document.querySelector("#good");
 last = null;
-
+/*
 function checker(item) {
   if (fastCheck.checked && cheapCheck.checked && goodCheck.checked) {
     last.checked = false;
@@ -11,22 +11,33 @@ function checker(item) {
     last = item; // 1. Durchlauf: last noch null !
   }
 }
+*/
 
-fastCheck.addEventListener("click", () => checker(fastCheck));
-cheapCheck.addEventListener("click", () => checker(cheapCheck));
-goodCheck.addEventListener("click", () => checker(goodCheck));
+// mein 1. Lösungsversuch (klappt!):
+let checkArr = [];
+function checker(item) {
+  if (item.checked) {
+    if (checkArr.length >= 2) {
+      checkArr.push(item);
+      checkArr[1].checked = false;
+      checkArr.splice(1, 1);
+    } else {
+      checkArr.push(item);
+    }
+  } else {
+    const index = checkArr.findIndex(function (e) {
+      // Callback
+      return e === item;
+    });
+    checkArr.splice(index, 1); // Startwert, wieviele ab da löschen
+  }
+}
+
+fastCheck.addEventListener("change", () => checker(fastCheck));
+cheapCheck.addEventListener("change", () => checker(cheapCheck));
+goodCheck.addEventListener("change", () => checker(goodCheck));
 
 /*
-// mein 1. Lösungsversuch (klappt noch nicht ganz):
-let checkArr = [];
-if (!checkArr.includes(item) && checkArr.length < 2) {
-    checkArr.push(item);
-  } else {
-    checkArr.push(item);
-    checkArr[1].checked = false;
-    checkArr.pop(checkArr[1]);
-  }
-
   // andere Lösung (Klasse vor uns, ähnlich meiner):
 const fastInputElement = document.querySelector("#fast")
 const cheapInputElement = document.querySelector("#cheap")
